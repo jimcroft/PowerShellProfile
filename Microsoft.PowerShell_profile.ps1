@@ -1,3 +1,6 @@
+$env:PSModulePath = "$env:USERPROFILE\OneDrive\Documents\WindowsPowerShell\Modules" + ";" + $env:PSModulePath
+
+
 # For Emacs / bash like ctrl+{a,e,d,k,r} etc commands
 Set-PSReadlineOption -EditMode Emacs
 Set-PSReadlineOption -BellStyle None
@@ -85,9 +88,12 @@ function Show-ProcessCreation {
 # $env:PATH shorter, keep hitting the limit
 #######################################################
 function New-KerberosTicket($principal) {
-    & "C:\\Program Files\\MIT\\Kerberos\\bin\\kinit.exe" $principal
-}
+	if (!$princial -and $env:KRB5_DEFAULT_PRINCIPAL) {
+		$principal = $env:KRB5_DEFAULT_PRINCIPAL
+	}
 
+    & "C:\\Program Files\\MIT\\Kerberos\\bin\\kinit.exe" -f -p -r 36000 $principal
+}
 
 function Show-KerberosTickets {
     & "C:\\Program Files\\MIT\\Kerberos\\bin\\klist.exe"
