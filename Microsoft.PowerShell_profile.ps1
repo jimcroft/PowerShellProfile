@@ -1,5 +1,13 @@
 $env:PSModulePath = "$env:USERPROFILE\OneDrive\Documents\WindowsPowerShell\Modules" + ";" + $env:PSModulePath
 
+# Enable theme
+Import-Module posh-git
+
+Import-Module oh-my-posh
+$ThemeSettings.MyThemesLocation = "$env:USERPROFILE\OneDrive\Documents\WindowsPowerShell\Themes"
+$DefaultUser = 'jimcr'
+
+Set-Theme Paradoxical
 
 # For Emacs / bash like ctrl+{a,e,d,k,r} etc commands
 Set-PSReadlineOption -EditMode Emacs
@@ -12,9 +20,6 @@ $PSDefaultParameterValues["Out-File:Encoding"] = "utf8"
 Set-PSReadlineKeyHandler -Chord Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key Tab -Function Complete
 # $ErrorView = "CategoryView"
-
-# Git prompt support https://github.com/dahlbyk/posh-git
-Import-Module posh-git
 
 # Aliases
 Set-Alias -Name uru -Value uru_rt
